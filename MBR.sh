@@ -1,5 +1,4 @@
 #!/bin/bash
-
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
         o
         n
@@ -31,4 +30,4 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sda
         2
         82
         w
-    EOF
+EOF
