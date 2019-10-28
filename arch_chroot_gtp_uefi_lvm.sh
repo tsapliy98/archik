@@ -28,6 +28,8 @@ arch-chroot /mnt <<EOF
     mkinitcpio -p linux
     echo 'Устанавливаем пароль рута'
     echo "root:1998" | chpasswd
+EOF
+arch-chroot /mnt <<EOF
     echo 'Ставим пакет загрузчика'
     pacman -S grub efibootmgr
     echo 'Создаем директорию для загрузчика'
@@ -37,7 +39,7 @@ arch-chroot /mnt <<EOF
     echo 'Ставим сам загрузчик на диск'
     grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
     echo 'Настраиваем загрузчик'
-    sed -i 's|^GRUB_CMDLINE_LINUX_DEFAULT.*|    GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/mapper/vg_arch-lv_swap cryptdevice=/dev/sda3:vg_arch loglevel=3 quiet"|' /etc/default/grub
+    sed -i 's|^GRUB_CMDLINE_LINUX_DEFAULT.*|GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/mapper/vg_arch-lv_swap cryptdevice=/dev/sda3:vg_arch loglevel=3 quiet"|' /etc/default/grub
     echo 'Обновляем конфиг загрузчика'
     grub-mkconfig -o /boot/grub/grub.cfg
     echo 'Ставим openssh'
