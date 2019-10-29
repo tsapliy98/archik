@@ -39,6 +39,9 @@ mkinitcpio -p linux
 echo 'Устанавливаем пароль рута'
 echo "root:1998" | chpasswd
 EOF
+
+echo "-----------------------------------"
+
 arch-chroot /mnt <<EOF
 echo 'Ставим пакет загрузчика'
 pacman -S grub efibootmgr
