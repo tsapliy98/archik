@@ -22,7 +22,7 @@ echo "Установка драйверов"
 pacman -S xf86-video-intel lib32-intel-dri intel-ucode
     
 echo "Установка оконного менеджера"
-pacman -S i3-wm i3lock rofi rxvt-unicode
+pacman -S i3-wm i3lock rofi rxvt-unicode firefox firefox-i18n-ru
 
 echo "Экранный менеджер"
 pacman -S lightdm lightdm-gtk-greeter
