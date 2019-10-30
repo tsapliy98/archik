@@ -66,21 +66,6 @@ pacman -S openssh
     
 echo 'Ставим программы для wifi'
 pacman -S wpa_supplicant dialog
-    
-echo 'Создаем нового пользователя'
-useradd -m -g users -G audio,lp,optical,power,scanner,storage,video,wheel -s /bin/bash sergey
-    
-echo 'Пароль нового пользователя'
-echo "sergey:1998" | chpasswd
-    
-echo 'sudoers'
-sed -i 's|^# wheel ALL=(ALL) ALL|wheel ALL=(ALL) ALL|' /etc/sudoers
-    
-echo 'multilib'
-sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf 
-    
-echo 'Обновление зеркалов'
-pacman -Syy
    
 echo 'Выходим из установленой системы'
 exit
