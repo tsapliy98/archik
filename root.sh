@@ -39,6 +39,9 @@ pacman -S ttf-liberation ttf-dejavu ttf-droid
 echo "Установка дополнения bash"
 pacman -S bash-completion 
 
+echo "Программа для смены тем"
+pacman -S lxappearance 
+
 echo "ЗАпуск программ"
 systemctl enable org.cups.cupsd.service NetworkManager
 
