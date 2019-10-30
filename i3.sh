@@ -1,5 +1,20 @@
 #!/bin/bash
 
+echo 'Создаем нового пользователя'
+useradd -m -g users -G audio,lp,optical,power,scanner,storage,video,wheel -s /bin/bash sergey
+    
+echo 'Пароль нового пользователя'
+echo "sergey:1998" | chpasswd
+    
+echo 'sudoers'
+sed -i 's|^# wheel ALL=(ALL) ALL|wheel ALL=(ALL) ALL|' /etc/sudoers
+    
+echo 'multilib'
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf 
+    
+echo 'Обновление зеркалов'
+pacman -Syy
+
 echo "Установка xorg"
 pacman -S xorg-server xorg-apps xorg-xinit
 
@@ -21,17 +36,11 @@ xdg-user-dirs-update
 echo "Установка звука"
 pacman -S pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-zeroconf 
 
-echo "Установка Flash player"
-pacman -S flashplugin
-
 echo "Установка networkmanager"
 pacman -S networkmanager network-manager-applet modemmanager  mobile-broadband-provider-info usb_modeswitch  rp-pppoe networkmanager-openconnect 
 
 echo "Установка тачпада"
 pacman -S xf86-input-synaptics
-
-echo "Установка драйверов на принтер"
-pacman -S cups foomatic foomatic-db-engine
 
 echo "Установка шрифтов"
 pacman -S ttf-liberation ttf-dejavu ttf-droid 
@@ -43,7 +52,7 @@ echo "Программа для смены тем"
 pacman -S lxappearance 
 
 echo "ЗАпуск программ"
-systemctl enable org.cups.cupsd.service NetworkManager
+systemctl enable NetworkManager
 
 echo "Выходим из под рута"
 exit  
